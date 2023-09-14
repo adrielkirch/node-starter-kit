@@ -1,16 +1,22 @@
 const jwt = require("jsonwebtoken");
 const crypto = require('crypto');
 
-
+const token = generateJsonwebtoken("64f14323a319e1b66583ce70");
+console.log(token);
+const decoded = decodedJsonwebtoken(token);
+console.log(decoded);
 
 function generateJsonwebtoken(userId) {
   const payload = { user: userId };
-    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
+  const secret = "your_secret_key"; // Replace 'your_secret_key' with your actual secret key
+  const token = jwt.sign(payload, secret);
   return token;
 }
+
 function decodedJsonwebtoken(token) {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    return decoded.userId;
+  const secret = "your_secret_key"; // Replace 'your_secret_key' with your actual secret key
+  const decoded = jwt.verify(token, secret);
+  return decoded.user; // You should return 'user', not 'userId'
 }
 
 function generateHashWithSalt(data) {
