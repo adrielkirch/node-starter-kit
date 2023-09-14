@@ -50,9 +50,20 @@ async function getAll(req, res) {
   }
 }
 
+async function pagination(req, res) {
+  try {
+    const user = await userService.pagination(req.body.pageSize,req.body.page);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
 module.exports = {
   add,
   login,
   getById,
-  getAll
+  getAll,
+  pagination
 };

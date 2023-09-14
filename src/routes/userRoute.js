@@ -31,4 +31,8 @@ router.get('/all',[
   authMiddleware
 ],userController.getAll)
 
+router.get('/pagination',[
+  authMiddleware
+],userController.pagination)
+
 module.exports = router; 
