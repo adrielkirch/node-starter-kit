@@ -11,6 +11,7 @@ router.post(
   [
     check('email').isEmail().normalizeEmail(),
     check('name').isString(),
+    check('password').isString(),
   ],
   userController.add
 );

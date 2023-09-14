@@ -1,13 +1,9 @@
 const userRepository = require('../repositories/userRepository');
 
-async function add(email, name) {
-  try {
-    console.log(email,' ', name)
-    const user = await userRepository.add(email, name);
+async function add(email, name, password) {
+    const user = await userRepository.add(email, name, password);
     return user;
-  } catch (error) {
-    throw new Error('Erro ao criar usuário no serviço');
-  }
+  
 }
 
 

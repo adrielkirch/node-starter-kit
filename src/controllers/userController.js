@@ -9,12 +9,13 @@ async function add(req, res) {
   }
 
   try {
-    const { email, name } = req.body;
-    const user = await userService.add(email, name);
+    const { email, name, password } = req.body;
+    const user = await userService.add(email, name, password);
     res.status(201).json(user);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao criar usuário' });
+    res.status(500).json({error});
   }
+  
 }
 
 module.exports = {

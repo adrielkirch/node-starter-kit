@@ -9,21 +9,19 @@ app.use("/user", userRouter);
 app.get("/", (req, res) => {
   res.send("Hello, to the app!");
 });
+const mongoose = require("mongoose");
 
-async function server() {
+async function startServer() {
   try {
-    const dbName = process.env.ENV;
-    const mongoUrl = process.env.DATABASE_URL + dbName;
-
-    await mongoDbSingleton.connect(mongoUrl);
+    await mongoose.connect('mongodb://localhost:27017/', { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('Connected to MongoDB');
-    const port = process.env.PORT;
-    app.listen(process.env.PORT, () => {
+    const port = 3000
+    app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);
     });
   } catch (err) {
-    console.error(`Failed to connect to MongoDB, ${err}`);
+    console.error('Failed to connect to MongoDB', err);
   }
 }
 
-server();
+startServer();
