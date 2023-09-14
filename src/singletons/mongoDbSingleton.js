@@ -1,25 +1,33 @@
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 
 class MongoDbSingleton {
   constructor() {
     this.db = null;
+    this.connect();
   }
 
-  async connect(url,dbName) {
+  async connect() {
     if (this.db) {
       return this.db;
     }
 
-    const client = await MongoClient.connect(url, {
+    const url = process.env.DATABASE_URL + process.env.ENV;
+    const connection = await mongoose.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
-    // Access the database, which will create it if it doesn't exist.
-    this.db = client.db(dbName);
+    this.db = mongoose.connection;
+    return this.db;
+  }
+
+  async getInstance() {
+    if (!this.db) {
+      await this.connect();
+    }
+    
     return this.db;
   }
 }
-
 
 module.exports = new MongoDbSingleton();

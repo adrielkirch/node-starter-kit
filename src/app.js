@@ -11,11 +11,12 @@ app.get("/", (req, res) => {
 });
 const mongoose = require("mongoose");
 
+
+
 async function startServer() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/', { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log('Connected to MongoDB');
-    const port = 3000
+    await mongoDbSingleton.getInstance();
+    const port = process.env.PORT
     app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);
     });
