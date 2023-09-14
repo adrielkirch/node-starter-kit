@@ -16,6 +16,15 @@ router.post(
   userController.add
 );
 
-// router.get('/', authMiddleware, userController.getById);
+router.post('/login', [
+  check('email').isEmail().normalizeEmail(),
+  check('password').isString(),
+],
+userController.login)
+
+router.get('/',[
+  authMiddleware
+],
+userController.getById)
 
 module.exports = router; 

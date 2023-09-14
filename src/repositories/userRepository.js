@@ -8,6 +8,12 @@ async function add(email, name,password) {
   return result._id;
 }
 
+async function login(email,password) {
+  const user = await User.findOne({email:email,password:password});
+  return user.toObject();
+}
+
 module.exports = {
-  add
+  add,
+  login
 };

@@ -1,5 +1,5 @@
-const userService = require('../services/userService');
-const { validationResult } = require('express-validator');
+const userService = require("../services/userService");
+const { validationResult } = require("express-validator");
 
 // Controlador para criar um novo usuário
 async function add(req, res) {
@@ -13,11 +13,37 @@ async function add(req, res) {
     const user = await userService.add(email, name, password);
     res.status(201).json(user);
   } catch (error) {
-    res.status(500).json({error});
+    res.status(500).json({ error: error.message });
   }
-  
+}
+
+async function login(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const { email, password } = req.body;
+    const user = await userService.login(email, password);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function getById(req, res) {
+  try {
+    console.log("req.user", req.user)
+    const user = await userService.getById(req.id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 module.exports = {
   add,
+  login,
+  getById
 };
