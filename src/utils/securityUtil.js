@@ -1,22 +1,16 @@
 const jwt = require("jsonwebtoken");
 const crypto = require('crypto');
-
-const token = generateJsonwebtoken("64f14323a319e1b66583ce70");
-console.log(token);
-const decoded = decodedJsonwebtoken(token);
-console.log(decoded);
+const secretJwt = process.env.JWT_SECRET_KEY; ; 
 
 function generateJsonwebtoken(userId) {
   const payload = { user: userId };
-  const secret = "your_secret_key"; // Replace 'your_secret_key' with your actual secret key
-  const token = jwt.sign(payload, secret);
+  const token = jwt.sign(payload, secretJwt);
   return token;
 }
 
 function decodedJsonwebtoken(token) {
-  const secret = "your_secret_key"; // Replace 'your_secret_key' with your actual secret key
-  const decoded = jwt.verify(token, secret);
-  return decoded.user; // You should return 'user', not 'userId'
+  const decoded = jwt.verify(token, secretJwt);
+  return decoded.user; 
 }
 
 function generateHashWithSalt(data) {
@@ -38,9 +32,15 @@ function genRandomBytes(len) {
     return buf.toString("hex");
 }
 
+function sensiviteDataField(data,field) {
+    delete data[field];
+    return data;
+}
+
 module.exports = { 
     generateJsonwebtoken,
     generateHashWithSalt,
     generateHashDigitalSignature,
-    decodedJsonwebtoken
+    decodedJsonwebtoken,
+    sensiviteDataField
 };

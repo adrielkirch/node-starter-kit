@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const securityUtil = require("../utils/securityUtil"); // Import your securityUtil module
+const securityUtil = require("../utils/securityUtil");
 
 function authMiddleware(req, res, next) {
   const token = req.header("Authorization");

@@ -34,8 +34,16 @@ async function login(req, res) {
 
 async function getById(req, res) {
   try {
-    console.log("req.user", req.user)
-    const user = await userService.getById(req.id);
+    const user = await userService.getById(req.user);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function getAll(req, res) {
+  try {
+    const user = await userService.getAll();
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -45,5 +53,6 @@ async function getById(req, res) {
 module.exports = {
   add,
   login,
-  getById
+  getById,
+  getAll
 };

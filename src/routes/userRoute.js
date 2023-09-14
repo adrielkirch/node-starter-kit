@@ -5,7 +5,6 @@ const userController = require('../controllers/userController');
 const { check } = require('express-validator');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-// Create a new user and return a token (no authentication needed)
 router.post(
   '/',
   [
@@ -25,6 +24,11 @@ userController.login)
 router.get('/',[
   authMiddleware
 ],
-userController.getById)
+userController.getById
+)
+
+router.get('/all',[
+  authMiddleware
+],userController.getAll)
 
 module.exports = router; 
