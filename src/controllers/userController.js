@@ -1,7 +1,6 @@
 const userService = require("../services/userService");
 const { validationResult } = require("express-validator");
 
-// Controlador para criar um novo usuário
 async function add(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

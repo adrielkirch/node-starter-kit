@@ -9,7 +9,7 @@ function authMiddleware(req, res, next) {
   }
 
   try {
-    req.user = securityUtil.decodedJsonwebtoken(token); // Call the function from securityUtil
+    req.user = securityUtil.decodedJsonwebtoken(token);
     next();
   } catch (error) {
     return res.status(401).send('Token is not valid');
