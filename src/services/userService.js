@@ -14,6 +14,7 @@ async function login(email, password) {
   if (!user) {
     throw new Error("Invalid email or password.");
   }
+  user = user.toObject();
   const token = securityUtil.generateJsonwebtoken(user._id.toString());
   user.token = token;
   user = securityUtil.sensiviteDataField(user, "password");

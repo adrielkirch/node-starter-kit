@@ -17,6 +17,7 @@ class MongoDbSingleton {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+  
 
     this.db = mongoose.connection;
     return this.db;

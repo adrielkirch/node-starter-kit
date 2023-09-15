@@ -9,8 +9,6 @@
     "prod": "NODE_ENV=production && node bin/www/app.js",
     "start": "export NODE_ENV=qa && node bin/www/app.js",
     "test": "jest",
-    "deploy": "npm run build && npm run start",
-    "kill": "npx kill-port 3000",
     "doc:dev:up": "docker compose up --build -d",
     "doc:dev:down": "docker compose down -v",
     "doc:prune": "docker system prune -a -f --volumes"

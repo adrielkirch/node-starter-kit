@@ -7,10 +7,9 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - '3000:8000'
+      - '8000:8000'
     volumes:
-      - ./:/app
-      - /app/node_modules
+      - .:/app # Map the current directory to /app
     env_file:
       - ./.env
     command: npm run dev
