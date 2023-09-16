@@ -12,7 +12,6 @@ class MongoDbSingleton {
     }
 
     const url = process.env.DATABASE_URL + process.env.NODE_ENV;
-    console.log("url: " + url);
     const connection = await mongoose.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
